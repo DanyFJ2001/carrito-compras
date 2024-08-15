@@ -1,17 +1,16 @@
 import React, { useState } from 'react';
-import { FlatList, Image, StyleSheet, Text, View } from 'react-native';
+import { FlatList, Image, Text, View, TouchableOpacity } from 'react-native';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { styles } from '../theme/Apptheme';
 import { TitleComponent } from '../components/Components';
-import { SECUNDARY_COLOR } from '../common/constans';
+
 import { BodyComponent } from '../components/Bodycomponent';
 import { CardProduct } from './homescreen/CardProduct';
 import { ModalCar } from './homescreen/Modalcar';
 
 
-
-//interface - producto
+// Interface - Producto
 export interface Product {
     id: number;
     name: string;
@@ -20,7 +19,7 @@ export interface Product {
     pathImage: string;
 }
 
-//interface - arreglo del carrito de compras
+// Interface - Arreglo del carrito de compras
 export interface Car {
     id: number;
     name: string;
@@ -29,7 +28,7 @@ export interface Car {
 }
 
 export const HomeScreen = () => {
-    //arreglo de productos
+    // Arreglo de productos
     const products: Product[] = [
         { id: 1, name: 'Michu 85 Gr', price: 18, stock: 5, pathImage: 'https://www.supermercadosantamaria.com/documents/10180/10504/172206697_M.jpg' },
         { id: 2, name: 'NutraPro Gatos ', price: 17.00, stock: 6, pathImage: 'https://purina.com.ec/sites/default/files/styles/simple_card/public/2022-11/cat-chow-gatitos-wet_1.png.webp?itok=fL-To08F' },
@@ -40,53 +39,73 @@ export const HomeScreen = () => {
         { id: 8, name: 'Royal Canin ', price: 31.00, stock: 3, pathImage: 'https://cdn.royalcanin-weshare-online.io/PyEua2QBaxEApS7LivtQ/v34/16-kitten-b1-ru?fm=jpg&auto=compress' },
     ];
 
-    //hook useState: manipular el estado del arreglo de productos
+    // Hook useState: Manipular el estado del arreglo de productos
     const [productsState, setProductsState] = useState(products);
 
-    //hook useSate: manipulas el estado del arreglo del carrito de compras
+    // Hook useState: Manipular el estado del arreglo del carrito de compras
     const [car, setCar] = useState<Car[]>([]);
 
-    //hook useState: manipular la visualización del modal
+    // Hook useState: Manipular la visualización del modal
     const [showModal, setShowModal] = useState<boolean>(false);
 
-    //función para actualizar el stock de productos
+    // Función para actualizar el stock de productos
     const changeStockProduct = (idProduct: number, quantity: number) => {
-        //generar un nuevo arreglo con las actualizaciones del stock
+        // Generar un nuevo arreglo con las actualizaciones del stock
         const updateStock = productsState.map(product => product.id === idProduct
             ? { ...product, stock: product.stock - quantity }
             : product);
-        //Actualizar el productsState
+        // Actualizar el productsState
         setProductsState(updateStock);
-        //llamar la función para agregar al carrito
+        // Llamar la función para agregar al carrito
         addProduct(idProduct, quantity);
     }
 
-    //función para agregar los productos al carrito
+    // Función para agregar los productos al carrito
     const addProduct = (idProduct: number, quantity: number) => {
-        //Buscar el producto que se agregará en el carrito
+        // Buscar el producto que se agregará en el carrito
         const product = productsState.find(product => product.id === idProduct);
-        //Controlar si el producto no ha sido encontrado
+        // Controlar si el producto no ha sido encontrado
         if (!product) {
             return;
         }
-        //Si el producto ha sido encontrado - generar nuevo objeto producto
-        const newProductCar: Car = {
-            id: product.id,
-            name: product.name,
-            price: product.price,
-            totalQuantity: quantity
+
+        // Verificar si el producto ya está en el carrito
+        const existingProductIndex = car.findIndex(item => item.id === idProduct);
+
+        if (existingProductIndex >= 0) {
+            // Si el producto ya está en el carrito, actualizar la cantidad
+            const updatedCar = car.map((item, index) => 
+                index === existingProductIndex 
+                ? { ...item, totalQuantity: item.totalQuantity + quantity } 
+                : item
+            );
+            setCar(updatedCar);
+
+
+        } else {
+            // Si el producto no está en el carrito, agregarlo
+            const newProductCar: Car = {
+                id: product.id,
+                name: product.name,
+                price: product.price,
+                totalQuantity: quantity
+            };
+            setCar([...car, newProductCar]);
         }
-        //Agregar en el arreglo del carrito
-        setCar([...car, newProductCar]);
-        //console.log(car);
+    }
+    const carrocero=()=>{
+        setCar([]);
     }
 
+    // Función para manejar el clic en el ícono del carrito
+    const handleCartIconPress = () => {
+        if (car.length > 0) {
+            setShowModal(!showModal);
+        }
+    }
 
     return (
         <View>
-
-
-
             <View style={styles.contentHeaderHome}>
                 <TitleComponent title='Productos' />
                 <Image
@@ -94,14 +113,15 @@ export const HomeScreen = () => {
                     style={styles.perrito}
                 />
                 <View style={styles.iconCardHome}>
-
                     <Text style={styles.textIconCard}>{car.length}</Text>
 
-                    <Icon
-                        name='shopping-cart'
-                        size={33}
-                        color={SECUNDARY_COLOR}
-                        onPress={() => setShowModal(!showModal)} />
+                    <TouchableOpacity onPress={handleCartIconPress} disabled={car.length === 0}>
+                        <Icon
+                            name='shopping-cart'
+                            size={33}
+                           
+                        />
+                    </TouchableOpacity>
                 </View>
             </View>
             <BodyComponent>
@@ -110,10 +130,10 @@ export const HomeScreen = () => {
                     renderItem={({ item }) => <CardProduct product={item} changeStockProduct={changeStockProduct} />}
                     keyExtractor={item => item.id.toString()} />
             </BodyComponent>
-            <ModalCar isVisible={showModal} car={car} setShowModal={() => setShowModal(!showModal)} />
-
-
+            <ModalCar isVisible={showModal} car={car} setShowModal={() => setShowModal(!showModal)
+                
+            }
+            carrocero={carrocero} />
         </View>
-
     )
 }

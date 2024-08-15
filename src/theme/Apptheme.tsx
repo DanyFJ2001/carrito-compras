@@ -327,5 +327,12 @@ export const styles = StyleSheet.create({
         height:50,
         left:17,
         
-      }
+      },
+      
+    textTotalPay: {
+        marginTop: 7,
+        fontSize: 16,
+        fontWeight: 'bold'
+    }
+
 });

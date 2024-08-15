@@ -3,7 +3,7 @@ import { Image, Modal, Text, TouchableOpacity, useWindowDimensions, View } from 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { Product } from '../HomeScreen';
 import { styles } from '../../theme/Apptheme';
-import { PRIMARY_COLOR } from '../../common/constans';
+import { PRIMARY_COLOR, SECUNDARY_COLOR } from '../../common/constans';
 
 
 //interface - props
