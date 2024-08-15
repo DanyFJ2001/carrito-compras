@@ -69,7 +69,7 @@ export const HomeScreen = () => {
         }
 
         // Verificar si el producto ya está en el carrito
-        const productoexistente = productsState.findIndex(product => product.id === idProduct);
+        const productoexistente = car.findIndex(product => product.id === idProduct);
 
         if (productoexistente >= 0) {
             // Si el producto ya está en el carrito, actualizar la cantidad
