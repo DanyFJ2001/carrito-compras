@@ -61,7 +61,7 @@ export const HomeScreen = () => {
 
     // Función para agregar los productos al carrito
     const addProduct = (idProduct: number, quantity: number) => {
-        // Buscar el producto que se agregará en el carrito
+        // buscar producto
         const product = productsState.find(product => product.id === idProduct);
         // Controlar si el producto no ha sido encontrado
         if (!product) {
@@ -69,12 +69,12 @@ export const HomeScreen = () => {
         }
 
         // Verificar si el producto ya está en el carrito
-        const existingProductIndex = car.findIndex(item => item.id === idProduct);
+        const productoexistente = productsState.findIndex(product => product.id === idProduct);
 
-        if (existingProductIndex >= 0) {
+        if (productoexistente >= 0) {
             // Si el producto ya está en el carrito, actualizar la cantidad
             const updatedCar = car.map((item, index) =>
-                index === existingProductIndex
+                index === productoexistente
                     ? { ...item, totalQuantity: item.totalQuantity + quantity }
                     : item
             );
@@ -96,8 +96,8 @@ export const HomeScreen = () => {
         setCar([]);
     }
 
-    // Función para manejar el clic en el ícono del carrito
-    const handleCartIconPress = () => {
+    // desactivar carrito
+    const descartivarcarrito = () => {
         if (car.length > 0) {
             setShowModal(!showModal);
         }
@@ -113,7 +113,7 @@ export const HomeScreen = () => {
                 />
                 <View style={styles.iconCardHome}>
                     <Text style={styles.textIconCard}>{car.length}</Text>
-                    <TouchableOpacity onPress={handleCartIconPress} disabled={car.length === 0}>
+                    <TouchableOpacity onPress={descartivarcarrito} disabled={car.length === 0}>
                         <Icon
                             name='shopping-cart'
                             size={33}
