@@ -98,10 +98,10 @@ export const LoginScreen = ({ users }: Props) => {
                     <Text style={styles.textRedirection}>No tienes una cuenta? Regístrate ahora</Text>
                 </TouchableOpacity>
                 <View>
-                <Image
-      source={require('../imagenes/a.jpg')} // Ruta relativa a la imagen en tu proyecto
-      style={styles.logo2}
-    />
+                    <Image
+                        source={require('../imagenes/a.jpg')} // Ruta relativa a la imagen en tu proyecto
+                        style={styles.logo2}
+                    />
                 </View>
             </BodyComponent>
         </View>

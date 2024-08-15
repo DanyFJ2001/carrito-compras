@@ -1,14 +1,11 @@
 import React, { useState } from 'react';
 import { FlatList, Image, Text, View, TouchableOpacity } from 'react-native';
-
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { styles } from '../theme/Apptheme';
 import { TitleComponent } from '../components/Components';
-
 import { BodyComponent } from '../components/Bodycomponent';
 import { CardProduct } from './homescreen/CardProduct';
 import { ModalCar } from './homescreen/Modalcar';
-
 
 // Interface - Producto
 export interface Product {
@@ -74,14 +71,12 @@ export const HomeScreen = () => {
 
         if (existingProductIndex >= 0) {
             // Si el producto ya está en el carrito, actualizar la cantidad
-            const updatedCar = car.map((item, index) => 
-                index === existingProductIndex 
-                ? { ...item, totalQuantity: item.totalQuantity + quantity } 
-                : item
+            const updatedCar = car.map((item, index) =>
+                index === existingProductIndex
+                    ? { ...item, totalQuantity: item.totalQuantity + quantity }
+                    : item
             );
             setCar(updatedCar);
-
-
         } else {
             // Si el producto no está en el carrito, agregarlo
             const newProductCar: Car = {
@@ -93,7 +88,8 @@ export const HomeScreen = () => {
             setCar([...car, newProductCar]);
         }
     }
-    const carrocero=()=>{
+
+    const carrocero = () => {
         setCar([]);
     }
 
@@ -114,12 +110,10 @@ export const HomeScreen = () => {
                 />
                 <View style={styles.iconCardHome}>
                     <Text style={styles.textIconCard}>{car.length}</Text>
-
                     <TouchableOpacity onPress={handleCartIconPress} disabled={car.length === 0}>
                         <Icon
                             name='shopping-cart'
                             size={33}
-                           
                         />
                     </TouchableOpacity>
                 </View>
@@ -128,12 +122,12 @@ export const HomeScreen = () => {
                 <FlatList
                     data={productsState}
                     renderItem={({ item }) => <CardProduct product={item} changeStockProduct={changeStockProduct} />}
-                    keyExtractor={item => item.id.toString()} />
+                    keyExtractor={item => item.id.toString()}
+                    horizontal={true}  // Hacer el FlatList horizontal
+                    showsHorizontalScrollIndicator={false}  // Opcional: Ocultar el indicador de desplazamiento horizontal
+                />
             </BodyComponent>
-            <ModalCar isVisible={showModal} car={car} setShowModal={() => setShowModal(!showModal)
-                
-            }
-            carrocero={carrocero} />
+            <ModalCar isVisible={showModal} car={car} setShowModal={() => setShowModal(!showModal)} carrocero={carrocero} />
         </View>
     )
 }
