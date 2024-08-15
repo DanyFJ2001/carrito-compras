@@ -1,8 +1,11 @@
 import React from 'react';
 import { TextInput, View } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialIcons';
 import { PRIMARY_COLOR } from '../common/constans';
 import { styles } from '../theme/Apptheme';
+import Icon from 'react-native-vector-icons/MaterialIcons';
+
+
+
 
 
 //interface - props
@@ -38,4 +41,3 @@ export const InputComponent = ({ placeholder, handleSetValues, name, isPassword 
         </View>
     )
 }
-
