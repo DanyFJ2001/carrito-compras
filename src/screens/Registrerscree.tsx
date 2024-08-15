@@ -13,7 +13,7 @@ import { InputComponent } from '../components/Inputcomponent';
 // interface - props
 interface Props {
     users: User[];
-    handleAddUser: (user: User) => void; // Agregar nuevos valores al arreglo
+    handleAddUser: (user: User) => void; 
 }
 
 // interface - objeto
@@ -103,7 +103,6 @@ export const RegisterScreen = ({ users, handleAddUser }: Props) => {
             <BodyComponent>
                 <View>
                     <Text style={styles.titleHeaderBody}>Estás muy cerca!</Text>
-                    <Text style={styles.textBody}>Realiza tus compras de manera rápida y segura</Text>
                 </View>
                 <View style={styles.contentInput}>
                     <InputComponent

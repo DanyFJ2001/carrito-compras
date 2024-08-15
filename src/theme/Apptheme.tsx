@@ -65,7 +65,7 @@ export const styles = StyleSheet.create({
     textAlign: 'center'
   },
   contentCard: {
-    top: 150,
+    top: 15,
     alignContent: "center",
     flexDirection: 'column',
     alignItems: 'center',
@@ -332,6 +332,20 @@ export const styles = StyleSheet.create({
     textAlign: 'center',
     marginTop: 10,
   },
+  oferta:{
+    top:-40,
+    width:400,
+    right:40,
+    alignContent: "center",
+    flexDirection: 'column',
+    alignItems: 'center',
+    padding: 10,
+    borderStyle: 'solid',
+    borderColor: '#ccc',
+   
+    borderRadius: 30,
+  },
+
   perrito: {
     width: 50,
     height: 50,
@@ -343,6 +357,102 @@ export const styles = StyleSheet.create({
     marginTop: 7,
     fontSize: 16,
     fontWeight: 'bold'
-  }
+  },
+  modalContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+},
+modalContent: {
+    backgroundColor: '#fff',
+    borderRadius: 10,
+    padding: 20,
+},
+modalHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+},
+modalTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+},
+closeButtonContainer: {
+    padding: 10,
+},
+tableHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 10,
+},
+tableHeaderTitle: {
+    fontWeight: 'bold',
+    flex: 1,
+},
+tableHeaderInfo: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    flex: 2,
+},
+infoText: {
+    fontWeight: 'bold',
+},
+productRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: '#ddd',
+},
+productImage: {
+    width: 50,
+    height: 50,
+    marginRight: 10,
+    borderRadius: 5,
+},
+productDetails: {
+    flex: 1,
+},
+productName: {
+    fontSize: 16,
+    fontWeight: 'bold',
+},
+productData: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: 5,
+},
+productPrice: {
+    flex: 1,
+    textAlign: 'center',
+},
+productQuantity: {
+    flex: 1,
+    textAlign: 'center',
+},
+productTotal: {
+    flex: 1,
+    textAlign: 'center',
+},
+totalAmountContainer: {
+    alignItems: 'flex-end',
+    marginTop: 10,
+},
+totalAmountText: {
+    fontSize: 16,
+    fontWeight: 'bold',
+},
+purchaseButton: {
+    backgroundColor: PRIMARY_COLOR,
+    borderRadius: 5,
+    padding: 10,
+    alignItems: 'center',
+    marginTop: 10,
+},
+purchaseButtonText: {
+    color: '#fff',
+    fontWeight: 'bold',
+},
 
 });

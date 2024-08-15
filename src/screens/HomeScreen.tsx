@@ -14,6 +14,7 @@ export interface Product {
     price: number;
     stock: number;
     pathImage: string;
+    
 }
 
 // Interface - Arreglo del carrito de compras
@@ -22,6 +23,7 @@ export interface Car {
     name: string;
     price: number;
     totalQuantity: number;
+    pathImage: string;
 }
 
 export const HomeScreen = () => {
@@ -83,7 +85,8 @@ export const HomeScreen = () => {
                 id: product.id,
                 name: product.name,
                 price: product.price,
-                totalQuantity: quantity
+                totalQuantity: quantity,
+                pathImage: product.pathImage,
             };
             setCar([...car, newProductCar]);
         }
@@ -116,9 +119,15 @@ export const HomeScreen = () => {
                             size={33}
                         />
                     </TouchableOpacity>
+                    
                 </View>
             </View>
+
             <BodyComponent>
+                <View><Image
+                    source={require('../imagenes/images.jpg')}
+                    style={styles.oferta}
+                /></View>
                 <FlatList
                     data={productsState}
                     renderItem={({ item }) => <CardProduct product={item} changeStockProduct={changeStockProduct} />}
