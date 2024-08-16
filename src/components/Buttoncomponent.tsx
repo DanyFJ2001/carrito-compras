@@ -6,7 +6,7 @@ import { styles } from '../theme/Apptheme';
 //interface - props
 interface Props {
     textButton: string;
-    onPress: () => void;     //prop función
+    onPress: () => void;    
 }
 
 export const ButtonComponent = ({ textButton, onPress }: Props) => {
