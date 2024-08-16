@@ -68,11 +68,11 @@ export const HomeScreen = () => {
             return;
         }
 
-        // Verificar si el producto ya está en el carrito
+        // buscar el producto existente 
         const productoexistente = car.findIndex(product => product.id === idProduct);
 
         if (productoexistente >= 0) {
-            // Si el producto ya está en el carrito, actualizar la cantidad
+            // actualizar cnt
             const updatedCar = car.map((item, index) =>
                 index === productoexistente
                     ? { ...item, totalQuantity: item.totalQuantity + quantity }
@@ -80,7 +80,7 @@ export const HomeScreen = () => {
             );
             setCar(updatedCar);
         } else {
-            // Si el producto no está en el carrito, agregarlo
+            
             const newProductCar: Car = {
                 id: product.id,
                 name: product.name,
@@ -113,7 +113,7 @@ export const HomeScreen = () => {
                 />
                 <View style={styles.iconCardHome}>
                     <Text style={styles.textIconCard}>{car.length}</Text>
-                    <TouchableOpacity onPress={descartivarcarrito} disabled={car.length === 0}>
+                    <TouchableOpacity onPress={descartivarcarrito}>
                         <Icon
                             name='shopping-cart'
                             size={33}
