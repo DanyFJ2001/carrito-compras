@@ -3,10 +3,19 @@ import { useState } from 'react';
 import { PRIMARY_COLOR } from '../common/constans';
 import { LoginScreen } from '../screens/Login';
 import { RegisterScreen } from '../screens/Registrerscree';
-import { HomeScreen } from '../screens/HomeScreen';
+import { HomeScreen, Car } from '../screens/HomeScreen';
 import { CustomInicioScreen } from '../screens/Inicio';
+import { Prueba } from '../screens/homescreen/Prueba';
+import { CardProduct } from '../screens/homescreen/CardProduct';
 
-
+export interface Car {
+    id: number;
+    name: string;
+    price: number;
+    totalQuantity: number;
+    pathImage: string;
+    stock:number;
+}
 
 //interface - arreglo objetos
 export interface User {
@@ -37,6 +46,9 @@ export const StackNavigator = () => {
         //Agregar le nuevo usario que reciba como parámetro
         setListUsers([...listUsers, user]);
     }
+    const car : Car[]=[
+        {id: 1, name: 'Michu 85 Gr', price: 18, stock: 5, pathImage: 'https://www.supermercadosantamaria.com/documents/10180/10504/172206697_M.jpg' }
+    ]
 
     return (
         <Stack.Navigator
@@ -58,6 +70,11 @@ export const StackNavigator = () => {
                 name='Home'
                 options={{ headerShown: false }}
                 component={HomeScreen} />
+                <Stack.Screen
+                name='Prueba'
+                options={{ headerShown: false }}
+                children={() => <Prueba car={car}  />}/>
+           
         </Stack.Navigator>
     );
 }

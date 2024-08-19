@@ -6,6 +6,7 @@ import { TitleComponent } from '../components/Components';
 import { BodyComponent } from '../components/Bodycomponent';
 import { CardProduct } from './homescreen/CardProduct';
 import { ModalCar } from './homescreen/Modalcar';
+import { CommonActions, useNavigation } from '@react-navigation/native';
 
 export interface Product {
     id: number;
@@ -35,6 +36,8 @@ export const HomeScreen = () => {
         { id: 7, name: 'Hills Science ', price: 18.00, stock: 7, pathImage: 'https://image.chewy.com/is/image/catalog/48900_MAIN._AC_SS300_V1720196503_.jpg' },
         { id: 8, name: 'Royal Canin ', price: 31.00, stock: 3, pathImage: 'https://cdn.royalcanin-weshare-online.io/PyEua2QBaxEApS7LivtQ/v34/16-kitten-b1-ru?fm=jpg&auto=compress' },
     ];
+    const navigation = useNavigation();
+
 
     // Estado del arreglo de productos
     const [productsState, setProductsState] = useState(products);
@@ -113,7 +116,8 @@ export const HomeScreen = () => {
                 />
                 <View style={styles.iconCardHome}>
                     <Text style={styles.textIconCard}>{car.length}</Text>
-                    <TouchableOpacity onPress={descartivarcarrito}>
+                    <TouchableOpacity
+                    onPress={() => navigation.dispatch(CommonActions.navigate({ name: 'Prueba' }))}>
                         <Icon
                             name='shopping-cart'
                             size={33}
