@@ -9,7 +9,8 @@ import { ModalProduct } from './ModalProdct';
 //interface - props
 interface Props {
     product: Product;
-    changeStockProduct: (idProduct: number, quantity: number) => void; //función para
+    changeStockProduct: (idProduct: number, quantity: number) => void; 
+    //función para
     //actualizar stock
 }
 

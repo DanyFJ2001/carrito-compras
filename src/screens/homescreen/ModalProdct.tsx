@@ -16,10 +16,10 @@ interface Props {
 }
 
 export const ModalProduct = ({ isVisible, setShowModal, product, changeStockProduct }: Props) => {
-    //hook useWindowDimension(): tomar el tamaño de la pantalla
+   
     const { width } = useWindowDimensions();
 
-    //hook useState: manipular la cantidad de productos
+    //Manipular la cantidad de productos
     const [quantity, setQuantity] = useState<number>(1);
 
     //función actualizar el valor de la cantidad de productos
