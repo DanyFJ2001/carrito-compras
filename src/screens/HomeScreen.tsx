@@ -58,7 +58,7 @@ export const HomeScreen = () => {
         addProduct(idProduct, quantity);
     }
 
-    // --funcion para agregar los productos--
+    // funcion para agregar los productos
 
     const addProduct = (idProduct: number, quantity: number) => {
 

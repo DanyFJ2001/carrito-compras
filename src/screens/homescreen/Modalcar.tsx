@@ -8,10 +8,9 @@ import { styles } from '../../theme/Apptheme';
 // Interface - Props
 interface Props {
     isVisible: boolean;
-    setShowModal: () => void; // Función para cerrar el modal
+    setShowModal: () => void; 
     car: Car[];
-    carrocero: () => void; // Función para vaciar el carrito
-}
+    carrocero: () => void; }
 
 export const ModalCar = ({ isVisible, car, setShowModal, carrocero }: Props) => {
     const { width } = useWindowDimensions();
