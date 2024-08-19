@@ -10,39 +10,33 @@ import { styles } from '../theme/Apptheme';
 import { InputComponent } from '../components/Inputcomponent';
 import { ButtonComponent } from '../components/Buttoncomponent';
 
-//interface - props
+//Props usuarios (array de users)
 interface Props {
     users: User[]
 }
-
-//interface - objeto
+//Formulario 
 interface FormLogin {
     email: string;
     password: string;
 }
 
 export const LoginScreen = ({ users }: Props) => {
-    //hook useState: manipular el estado del formulario
     const [formLogin, setFormLogin] = useState<FormLogin>({
         email: '',
         password: ''
     });
-    //hook useState: permitir que se haga visible/no visible el contenido del password
+    //hacer visible o no la constrasena
     const [hiddenPassword, setHiddenPassword] = useState<boolean>(true);
 
-    //hook useNavigation(): navega de una pantalla a otra
     const navigation = useNavigation();
 
-    //función para actualizar el estado del formulario
+    //Actualizar el estado del formulario
     const handleSetValues = (name: string, value: string) => {
-        //Cambiar el estado del formLogin
-        //... operador de propagación | spread: crear una copia del objeto
         setFormLogin({ ...formLogin, [name]: value });
     }
 
-    //función para iniciar sesión
+    //Iniciar sesion
     const handleSignIn = () => {
-        //Validando que los campos estén llenos
         if (!formLogin.email || !formLogin.password) {
             Alert.alert(
                 'Error',
@@ -50,7 +44,6 @@ export const LoginScreen = ({ users }: Props) => {
             );
             return;
         }
-        //Validando que el usuario exista
         if (!verifyUser()) {
             Alert.alert(
                 'Error',
@@ -58,13 +51,11 @@ export const LoginScreen = ({ users }: Props) => {
             );
             return;
         }
-        //Si inicio sesión sin problemas, vamos al Home Screen
+
         navigation.dispatch(CommonActions.navigate({ name: 'Home' }));
-        //console.log(formLogin);
 
     }
-
-    //función verificar si existe el correo y contraseña (usuario)
+    //Verificacion de usuario existenten
     const verifyUser = (): User => {
         const existUser = users.filter(user => user.email === formLogin.email && user.password === formLogin.password)[0];
         return existUser;
@@ -72,6 +63,7 @@ export const LoginScreen = ({ users }: Props) => {
 
     return (
         <View>
+
             <StatusBar backgroundColor={PRIMARY_COLOR} />
             <TitleComponent title='Iniciar Sesión' />
             <BodyComponent>
@@ -92,14 +84,17 @@ export const LoginScreen = ({ users }: Props) => {
                         hasIcon={true}
                         setHiddenPaswword={() => setHiddenPassword(!hiddenPassword)} />
                 </View>
+
                 <ButtonComponent textButton='Iniciar' onPress={handleSignIn} />
+
                 <TouchableOpacity
                     onPress={() => navigation.dispatch(CommonActions.navigate({ name: 'Register' }))}>
                     <Text style={styles.textRedirection}>No tienes una cuenta? Regístrate ahora</Text>
                 </TouchableOpacity>
+                
                 <View>
                     <Image
-                        source={require('../imagenes/a.jpg')} // Ruta relativa a la imagen en tu proyecto
+                        source={require('../imagenes/a.jpg')}
                         style={styles.logo2}
                     />
                 </View>

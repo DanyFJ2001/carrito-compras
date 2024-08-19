@@ -7,17 +7,15 @@ import { BodyComponent } from '../components/Bodycomponent';
 import { CardProduct } from './homescreen/CardProduct';
 import { ModalCar } from './homescreen/Modalcar';
 
-// Interface - Producto
 export interface Product {
     id: number;
     name: string;
     price: number;
     stock: number;
     pathImage: string;
-    
+
 }
 
-// Interface - Arreglo del carrito de compras
 export interface Car {
     id: number;
     name: string;
@@ -27,7 +25,7 @@ export interface Car {
 }
 
 export const HomeScreen = () => {
-    // Arreglo de productos
+
     const products: Product[] = [
         { id: 1, name: 'Michu 85 Gr', price: 18, stock: 5, pathImage: 'https://www.supermercadosantamaria.com/documents/10180/10504/172206697_M.jpg' },
         { id: 2, name: 'NutraPro Gatos ', price: 17.00, stock: 6, pathImage: 'https://purina.com.ec/sites/default/files/styles/simple_card/public/2022-11/cat-chow-gatitos-wet_1.png.webp?itok=fL-To08F' },
@@ -38,18 +36,19 @@ export const HomeScreen = () => {
         { id: 8, name: 'Royal Canin ', price: 31.00, stock: 3, pathImage: 'https://cdn.royalcanin-weshare-online.io/PyEua2QBaxEApS7LivtQ/v34/16-kitten-b1-ru?fm=jpg&auto=compress' },
     ];
 
-    // Hook useState: Manipular el estado del arreglo de productos
+    // Estado del arreglo de productos
     const [productsState, setProductsState] = useState(products);
 
-    // Hook useState: Manipular el estado del arreglo del carrito de compras
+    // Estado del arreglo del carrito de compras
     const [car, setCar] = useState<Car[]>([]);
 
-    // Hook useState: Manipular la visualización del modal
+    // Visualización del modal
     const [showModal, setShowModal] = useState<boolean>(false);
 
-    // Función para actualizar el stock de productos
+    // Actualizar el stock de productos
     const changeStockProduct = (idProduct: number, quantity: number) => {
-        // Generar un nuevo arreglo con las actualizaciones del stock
+
+        // Arreglo con las actualizaciones del stock
         const updateStock = productsState.map(product => product.id === idProduct
             ? { ...product, stock: product.stock - quantity }
             : product);
@@ -59,20 +58,22 @@ export const HomeScreen = () => {
         addProduct(idProduct, quantity);
     }
 
-    // Función para agregar los productos al carrito
+    // --funcion para agregar los productos--
+
     const addProduct = (idProduct: number, quantity: number) => {
-        // buscar producto
+
+
+        // Buscar producto
         const product = productsState.find(product => product.id === idProduct);
         // Controlar si el producto no ha sido encontrado
         if (!product) {
             return;
         }
-
         // buscar el producto existente 
         const productoexistente = car.findIndex(product => product.id === idProduct);
 
         if (productoexistente >= 0) {
-            // actualizar cnt
+            // Icrementar el producto 
             const updatedCar = car.map((item, index) =>
                 index === productoexistente
                     ? { ...item, totalQuantity: item.totalQuantity + quantity }
@@ -80,7 +81,6 @@ export const HomeScreen = () => {
             );
             setCar(updatedCar);
         } else {
-            
             const newProductCar: Car = {
                 id: product.id,
                 name: product.name,
@@ -96,7 +96,7 @@ export const HomeScreen = () => {
         setCar([]);
     }
 
-    // desactivar carrito
+    // Desactivar carrito
     const descartivarcarrito = () => {
         if (car.length > 0) {
             setShowModal(!showModal);
@@ -119,7 +119,7 @@ export const HomeScreen = () => {
                             size={33}
                         />
                     </TouchableOpacity>
-                    
+
                 </View>
             </View>
 
@@ -132,8 +132,8 @@ export const HomeScreen = () => {
                     data={productsState}
                     renderItem={({ item }) => <CardProduct product={item} changeStockProduct={changeStockProduct} />}
                     keyExtractor={item => item.id.toString()}
-                    horizontal={true}  // Hacer el FlatList horizontal
-                    showsHorizontalScrollIndicator={false}  // Opcional: Ocultar el indicador de desplazamiento horizontal
+                    horizontal={true}  
+                    showsHorizontalScrollIndicator={false} 
                 />
             </BodyComponent>
             <ModalCar isVisible={showModal} car={car} setShowModal={() => setShowModal(!showModal)} carrocero={carrocero} />

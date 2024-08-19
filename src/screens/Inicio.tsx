@@ -7,36 +7,30 @@ import { CommonActions, useNavigation } from '@react-navigation/native';
 
 
 export const CustomInicioScreen = () => {
-      //hook useNavigation(): navega de una pantalla a otra
-      const navigation = useNavigation();
+  //Navegacion
+  const navigation = useNavigation();
 
   return (
     <View style={styles.mainContainer}>
       <Text style={styles.headerText}>Petshop</Text>
-
       <View style={styles.buttonGroup}>
+
+
         <TouchableOpacity
-        style={styles.loginButton}
-        
-        onPress={() => navigation.dispatch(CommonActions.navigate({ name: 'Login' }))}
-        >
+          style={styles.loginButton}
+          onPress={() => navigation.dispatch(CommonActions.navigate({ name: 'Login' }))}>
           <Text style={styles.loginButtonText}>Iniciar sesión</Text>
         </TouchableOpacity>
-
         <TouchableOpacity
-        style={styles.registerButton}
-        
-          onPress={() => navigation.dispatch(CommonActions.navigate({ name: 'Register' }))}
-        >
+          style={styles.registerButton}
+          onPress={() => navigation.dispatch(CommonActions.navigate({ name: 'Register' }))}>
           <Text style={styles.registerButtonText}>Registrarte</Text>
         </TouchableOpacity>
-  
-        
       </View>
-      
+
       <View>
         <Image
-          source={require('../imagenes/5.jpg')} // Ruta relativa a la imagen en tu proyecto
+          source={require('../imagenes/5.jpg')}
           style={styles.image}
         />
       </View>

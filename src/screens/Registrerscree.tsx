@@ -10,13 +10,12 @@ import { styles } from '../theme/Apptheme';
 import { ButtonComponent } from '../components/Buttoncomponent';
 import { InputComponent } from '../components/Inputcomponent';
 
-// interface - props
 interface Props {
     users: User[];
-    handleAddUser: (user: User) => void; 
+    handleAddUser: (user: User) => void;
 }
 
-// interface - objeto
+// Formulario de registro
 interface FormRegister {
     firstName: string;
     lastName: string;
@@ -26,7 +25,7 @@ interface FormRegister {
 }
 
 export const RegisterScreen = ({ users, handleAddUser }: Props) => {
-    // hook useState: manipular el formulario de registro
+    // Manipular el formulario de registro
     const [formRegister, setFormRegister] = useState<FormRegister>({
         firstName: '',
         lastName: '',
@@ -35,10 +34,8 @@ export const RegisterScreen = ({ users, handleAddUser }: Props) => {
         password: ''
     });
 
-    // hook useState: permitir que se haga visible/no visible el contenido del password
+    // hook para la visibilidad de la contrasena 
     const [hiddenPassword, setHiddenPassword] = useState<boolean>(true);
-
-    // hook useNavigation: navegar de una pantalla a otra
     const navigation = useNavigation();
 
     // función actualizar el estado del formulario registro
@@ -46,9 +43,8 @@ export const RegisterScreen = ({ users, handleAddUser }: Props) => {
         setFormRegister({ ...formRegister, [name]: value });
     }
 
-    // función registrar nuevos usuarios
+    // Registro de nuevos usuarios
     const handleSignUp = () => {
-        // Validar que todos los campos estén llenos
         if (!formRegister.firstName || !formRegister.lastName || !formRegister.age || !formRegister.email || !formRegister.password) {
             Alert.alert(
                 'Error',
@@ -56,8 +52,6 @@ export const RegisterScreen = ({ users, handleAddUser }: Props) => {
             );
             return;
         }
-
-        // Validar que no se registre un usuario que ya se encuentre en el arreglo
         if (verifyUser() != null) {
             Alert.alert(
                 'Error',
@@ -67,11 +61,11 @@ export const RegisterScreen = ({ users, handleAddUser }: Props) => {
         }
 
         // Registrar nuevo usuario
-        // Obtener el id de los usuarios
-        const getIdUsers = users.map(user => user.id); //[1,2]
+
+        const getIdUsers = users.map(user => user.id);
         // Obtener el nuevo id del nuevo usuario
         const getNewId = Math.max(...getIdUsers) + 1;
-        // Generar la información del nuevo usuario - nuevo objeto
+        // Generar la información del nuevo usuario
         const newUser: User = {
             id: getNewId,
             firstName: formRegister.firstName,
@@ -80,17 +74,15 @@ export const RegisterScreen = ({ users, handleAddUser }: Props) => {
             email: formRegister.email,
             password: formRegister.password
         }
-        // Agregar el nuevo usuario al arreglo
         handleAddUser(newUser);
         Alert.alert(
             'Felicitaciones',
             'Registro exitoso!'
         );
-        // Regreso a la anterior pantalla
         navigation.goBack();
     }
 
-    // función verificar si el usuario está registrado
+    // Verificacion si el usuario está registrado
     const verifyUser = () => {
         const existUser = users.filter(user => user.email === formRegister.email)[0];
         return existUser;
@@ -117,7 +109,7 @@ export const RegisterScreen = ({ users, handleAddUser }: Props) => {
                         placeholder='Edad'
                         handleSetValues={handleSetValues}
                         name='age'
-                      />
+                    />
                     <InputComponent
                         placeholder='Correo'
                         handleSetValues={handleSetValues}

@@ -14,7 +14,7 @@ interface Props {
 }
 
 export const CardProduct = ({ product, changeStockProduct }: Props) => {
-    //hook useState: permitir visualizar o no el modal
+    //Visualizar o no el modal
     const [showModal, setShowModal] = useState<boolean>(false);
 
     return (
